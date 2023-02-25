@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 
-file_path= os.path("C:\Users\Admin\Desktop\Yakub_ML\Parkinsondata.csv")
+file_path= os.path(r"C:\\Users\\Admin\\Desktop\\Yakub_ML\\Parkinsondata.csv")
 
 
 st.header("Welcome to the page!")
