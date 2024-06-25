@@ -1,0 +1,35 @@
+import requests
+from bs4 import BeautifulSoup
+
+# uer provide you with the id of the div class holding the urls and class of the code language.
+
+main_url = "https://rosettacode.org/wiki/Category:COBOL"
+    
+def extract_urls(url):
+    # Get the HTML content of the webpage
+    response = requests.get(url)
+    html_content = response.content
+
+    # Parse the HTML content with Beautiful Soup
+    soup = BeautifulSoup(html_content, 'html.parser')
+
+    list_items_li = soup.find('div', id = 'mw-pages').find_all('li')
+    url_list = []
+    for i in list_items_li:    
+        url_href = 'https://rosettacode.org/' + i.find('a').get('href')
+        #print(url_href)
+        url_list.append(url_href)
+        fetch_cobol_text(url_href)
+
+def fetch_cobol_text(url):
+    # Get the HTML content of the webpage
+    response = requests.get(url)
+    html_content = response.content
+
+    # Parse the HTML content with Beautiful Soup
+    soup = BeautifulSoup(html_content, 'html.parser')
+
+    cobol_div = soup.find('div',class_='mw-highlight mw-highlight-lang-cobol mw-content-ltr')
+    print(" the cobol code :",cobol_div.text)    
+
+extract_urls(main_url)
