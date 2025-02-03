@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
       - name: Check out Python
-      - uses: actions/setup-python@v5
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Setup Streamlit
-      - uses: streamlit/streamlit-app-action@v0.0.3
+        uses: streamlit/streamlit-app-action@v0.0.3
         with:
           app-path: app.py
           ruff: true
