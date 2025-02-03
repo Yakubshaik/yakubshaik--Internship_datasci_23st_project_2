@@ -23,13 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas
           pip install streamlit
-          pip install pyngrok  # Install ngrok for public access
 
-      - name: Run Streamlit with ngrok
+      - name: Run Streamlit with localhost.run
         run: |
-          echo "Starting Streamlit..."
-          streamlit run app.py --server.headless true &  # Run Streamlit in the background
-          echo "Starting ngrok..."
-          ngrok http 8501 &  # Expose Streamlit on port 8501
-          sleep 5  # Wait for ngrok to initialize
-          curl -s http://localhost:4040/api/tunnels  # Get public ngrok URL
+          streamlit run app.py --server.headless true --server.port 8501 &
+          sleep 5  # Allow Streamlit some time to start
+          ssh -o StrictHostKeyChecking=no -R 80:localhost:8501 nokey@localhost.run
