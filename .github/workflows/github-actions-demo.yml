@@ -1,15 +1,19 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on:
+  push:
+    branches: ["main"]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
       - uses: actions/checkout@v4
+      - name: Check out Python
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Setup Streamlit
       - uses: streamlit/streamlit-app-action@v0.0.3
         with:
           app-path: app.py
